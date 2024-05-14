@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>motor_controller</name>
+  <version>1.0.0</version>
+  <description>ROS 2 package for serial communication used to interface Raspberry Pi 3B+ and Arduino Nano, controls motors</description>
+  <maintainer email="ilyas.asmouki@epfl.ch">Ilyas Asmouki</maintainer>
+  <license>Apache 2.0</license>
+  <author email="ilyas.asmouki@epfl.ch">Ilyas Asmouki</author>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+  <!-- System Dependencies
+  Please ensure you have the following system dependencies installed to build and run this package:
+
+  - libserial-dev: Required for serial communication. Install using `sudo apt-get install libserial-dev` on Ubuntu-based systems.
+  -->
+  <exec_depend>serial</exec_depend>
+  <build_depend>rosidl_default_generators</build_depend>
+  <exec_depend>rosidl_default_runtime</exec_depend>
+  <member_of_group>rosidl_interface_packages</member_of_group>
+
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
