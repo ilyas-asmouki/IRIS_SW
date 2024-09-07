@@ -21,10 +21,8 @@ void TerminalCommandInterface::listen()
         int velocity;
         bool invalid = false;
 
-        // Initialize motor velocities to 0
         int fr_velocity = 0, fl_velocity = 0, rr_velocity = 0, rl_velocity = 0;
 
-        // Process each command in the input line
         while (iss >> motor) 
         {
             if (!(iss >> velocity)) {
@@ -33,7 +31,6 @@ void TerminalCommandInterface::listen()
                 break;
             }
 
-            // Handle the different commands
             if (motor == "fr") {
                 fr_velocity = velocity;
             } else if (motor == "fl") {
@@ -42,21 +39,21 @@ void TerminalCommandInterface::listen()
                 rr_velocity = velocity;
             } else if (motor == "rl") {
                 rl_velocity = velocity;
-            } else if (motor == "fw") {  // Forward: Set both front motors to the same velocity
+            } else if (motor == "fw") {  // forward: set both front motors to the same velocity
                 fr_velocity = velocity;
                 fl_velocity = velocity;
-            } else if (motor == "bw") {  // Backward: Set both front motors to the same negative velocity
+            } else if (motor == "bw") {  // backward: set both front motors to the same negative velocity
                 fr_velocity = -velocity;
                 fl_velocity = -velocity;
-            } else if (motor == "rt") {  // Rotate: Set front and rear motors to opposite velocities for rotation
+            } else if (motor == "rt") {  // rotate: set front and rear motors to opposite velocities for rotation
                 fr_velocity = velocity;
                 fl_velocity = -velocity;
                 rr_velocity = velocity;
                 rl_velocity = -velocity;
-            } else if (motor == "tn") {  // Turn: Set rear motors, use negative velocity for left turn
+            } else if (motor == "tn") {  // turn: set rear motors, use negative velocity for left turn
                 rr_velocity = velocity;
                 rl_velocity = -velocity;
-            } else if (motor == "st") {  // Stop: Set all motors to 0
+            } else if (motor == "st") {  // stop: set all motors to 0
                 fr_velocity = 0;
                 fl_velocity = 0;
                 rr_velocity = 0;
@@ -69,7 +66,6 @@ void TerminalCommandInterface::listen()
         }
 
         if (!invalid) {
-            // Send motor commands to ROS for each motor
             sendMotorCommand("fr", fr_velocity);
             sendMotorCommand("fl", fl_velocity);
             sendMotorCommand("rr", rr_velocity);
