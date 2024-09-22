@@ -25,15 +25,11 @@ MotorController::MotorController() : Node("motor_controller")
 
 void MotorController::commandCallback(const motor_controller::msg::MotorCommand::SharedPtr msg)
 {
-    std::string motor = msg->motor;
-    int velocity = msg->velocity;
-
-    // For example, print the received data
-    RCLCPP_INFO(this->get_logger(), "Received command for motor '%s' with velocity '%d'", motor.c_str(), velocity);
+    std::string command = msg->motor;  // use entire command string for convenience (to be rewritten properly)
+    RCLCPP_INFO(this->get_logger(), "Received command: '%s'", command.c_str());
 
     // Send command to Arduino
-    std::string data_to_send = motor + " " + std::to_string(velocity);
-    sendData(data_to_send);
+    sendData(command);
 }
 
 int MotorController::readData() 
@@ -54,14 +50,13 @@ void MotorController::communicate()
 {
     if (serial.available()) {
         int received_data = this->readData();
-        // Process the received data and send a response
-        std::string send_data = std::to_string(received_data + 2); // Example processing
+        std::string send_data = std::to_string(received_data + 2); // example processing
         this->sendData(send_data);
     } 
     else 
     {
-        // Send some initial data or keep-alive message to Arduino
-        sendData(std::to_string(10)); // Sending an example value
+        // some some initial data or keep-alive message to arduino
+        sendData(std::to_string(10)); // example value
     }
 }
 
