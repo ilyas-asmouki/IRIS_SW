@@ -79,11 +79,10 @@ void TerminalCommandInterface::listen()
     }
 }
 
-// Helper function to send motor commands to ROS
 void TerminalCommandInterface::sendMotorCommand(const std::string &command)
 {
     auto message = motor_controller::msg::MotorCommand();
-    message.motor = command;  // Use the entire command string
+    message.motor = command;  // use entire command string (to be changed later)
     command_publisher->publish(message);
 }
 
