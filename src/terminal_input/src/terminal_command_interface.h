@@ -15,7 +15,7 @@ private:
     rclcpp::Publisher<motor_controller::msg::MotorCommand>::SharedPtr command_publisher;
     rclcpp::Publisher<motor_controller::msg::MotorCommand>::SharedPtr keyhold_publisher;
     void listen();
-    void sendMotorCommand(const std::string &motor, int velocity);
+    void sendMotorCommand(const std::string &command);
 };
 
 #endif
