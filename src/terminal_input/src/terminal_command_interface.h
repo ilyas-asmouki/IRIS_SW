@@ -13,9 +13,8 @@ public:
     TerminalCommandInterface();
 private:
     rclcpp::Publisher<motor_controller::msg::MotorCommand>::SharedPtr command_publisher;
-    rclcpp::Publisher<motor_controller::msg::MotorCommand>::SharedPtr keyhold_publisher;
     void listen();
-    void sendMotorCommand(const std::string &command);
+    void send_motor_command(const std::string &command);
 };
 
 #endif
