@@ -5,7 +5,6 @@
 TerminalCommandInterface::TerminalCommandInterface() : Node("terminal_command_interface")
 {
     command_publisher = this->create_publisher<motor_controller::msg::MotorCommand>("/motor_commands", 10);
-    keyhold_publisher = this->create_publisher<motor_controller::msg::MotorCommand>("/key_commands", 10);
     std::thread([this]() { this->listen(); }).detach();
 }
 
@@ -72,14 +71,14 @@ void TerminalCommandInterface::listen()
         if (!invalid) {
             std::ostringstream oss;
             oss << "fr " << fr_velocity << " fl " << fl_velocity << " rr " << rr_velocity << " rl " << rl_velocity;
-            sendMotorCommand(oss.str());
+            send_motor_command(oss.str());
         }
 
         std::cout << "Enter commands: " << std::endl;
     }
 }
 
-void TerminalCommandInterface::sendMotorCommand(const std::string &command)
+void TerminalCommandInterface::send_motor_command(const std::string &command)
 {
     auto message = motor_controller::msg::MotorCommand();
     message.motor = command;  // use entire command string (to be changed later)
