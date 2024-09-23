@@ -11,6 +11,7 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 find_library(SERIAL_LIB serial)
 
@@ -25,7 +26,7 @@ endif()
 include_directories(include)
 
 add_executable(motor_controller_node src/motor_controller.cpp)
-ament_target_dependencies(motor_controller_node rclcpp)
+ament_target_dependencies(motor_controller_node rclcpp std_msgs)
 rosidl_target_interfaces(motor_controller_node ${PROJECT_NAME} rosidl_typesupport_cpp)
 target_link_libraries(motor_controller_node ${SERIAL_LIB})
 
